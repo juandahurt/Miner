@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "pepe",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/juandahurt/Pepe",
+      "state" : {
+        "revision" : "76bc810bc493318540f8055926008cec76202c23",
+        "version" : "0.0.2"
+      }
+    }
+  ],
+  "version" : 2
+}
