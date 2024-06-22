@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		2F205F6F2C17833E008C3B7B /* MNRLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F205F6E2C17833E008C3B7B /* MNRLogger.swift */; };
 		2F205F722C178392008C3B7B /* Pepe in Frameworks */ = {isa = PBXBuildFile; productRef = 2F205F712C178392008C3B7B /* Pepe */; };
+		2F205F752C178956008C3B7B /* MNRMetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F205F742C178956008C3B7B /* MNRMetalView.swift */; };
+		2F205F772C178B4D008C3B7B /* MNRRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F205F762C178B4D008C3B7B /* MNRRenderer.swift */; };
+		2F6C83E92C1E57B6002E4D3A /* Vertex.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C83E82C1E57B6002E4D3A /* Vertex.metal */; };
+		2F6C83EB2C1E57FC002E4D3A /* Fragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C83EA2C1E57FC002E4D3A /* Fragment.metal */; };
 		2FBA17E92C07F5150090439C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBA17E82C07F5150090439C /* AppDelegate.swift */; };
 		2FBA17EB2C07F5150090439C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBA17EA2C07F5150090439C /* ViewController.swift */; };
 		2FBA17ED2C07F5160090439C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FBA17EC2C07F5160090439C /* Assets.xcassets */; };
@@ -17,6 +21,10 @@
 
 /* Begin PBXFileReference section */
 		2F205F6E2C17833E008C3B7B /* MNRLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRLogger.swift; sourceTree = "<group>"; };
+		2F205F742C178956008C3B7B /* MNRMetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRMetalView.swift; sourceTree = "<group>"; };
+		2F205F762C178B4D008C3B7B /* MNRRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRRenderer.swift; sourceTree = "<group>"; };
+		2F6C83E82C1E57B6002E4D3A /* Vertex.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Vertex.metal; sourceTree = "<group>"; };
+		2F6C83EA2C1E57FC002E4D3A /* Fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fragment.metal; sourceTree = "<group>"; };
 		2FBA17E52C07F5150090439C /* Miner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Miner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FBA17E82C07F5150090439C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FBA17EA2C07F5150090439C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +61,25 @@
 			path = Logger;
 			sourceTree = "<group>";
 		};
+		2F205F732C178940008C3B7B /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				2F6C83E52C1E579D002E4D3A /* Shaders */,
+				2F205F742C178956008C3B7B /* MNRMetalView.swift */,
+				2F205F762C178B4D008C3B7B /* MNRRenderer.swift */,
+			);
+			path = Graphics;
+			sourceTree = "<group>";
+		};
+		2F6C83E52C1E579D002E4D3A /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				2F6C83E82C1E57B6002E4D3A /* Vertex.metal */,
+				2F6C83EA2C1E57FC002E4D3A /* Fragment.metal */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
 		2FBA17DC2C07F5150090439C = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +99,7 @@
 		2FBA17E72C07F5150090439C /* Miner */ = {
 			isa = PBXGroup;
 			children = (
+				2F205F732C178940008C3B7B /* Graphics */,
 				2F205F6B2C1782C3008C3B7B /* Core */,
 				2FBA17E82C07F5150090439C /* AppDelegate.swift */,
 				2FBA17EA2C07F5150090439C /* ViewController.swift */,
@@ -159,8 +187,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F205F752C178956008C3B7B /* MNRMetalView.swift in Sources */,
+				2F205F772C178B4D008C3B7B /* MNRRenderer.swift in Sources */,
 				2FBA17EB2C07F5150090439C /* ViewController.swift in Sources */,
+				2F6C83E92C1E57B6002E4D3A /* Vertex.metal in Sources */,
 				2F205F6F2C17833E008C3B7B /* MNRLogger.swift in Sources */,
+				2F6C83EB2C1E57FC002E4D3A /* Fragment.metal in Sources */,
 				2FBA17E92C07F5150090439C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
