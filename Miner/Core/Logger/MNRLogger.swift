@@ -14,7 +14,7 @@ struct MNRLogger {
     private init() {}
     
     private static func log(message: String, level: LogLevel) {
-        pepeLogger.log("MNR: " + message, level: level)
+        pepeLogger.log(message, level: level)
     }
     
     static func setup() {

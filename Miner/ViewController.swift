@@ -8,11 +8,23 @@
 import Cocoa
 
 class ViewController: NSViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        MNRLogger.setup()
+        
+        
+        let metalView = MNRMetalView(frame: view.bounds)
+        metalView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(metalView)
+        
+        NSLayoutConstraint.activate([
+            metalView.topAnchor.constraint(equalTo: view.topAnchor),
+            metalView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            metalView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            metalView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        ])
     }
 
     override var representedObject: Any? {
@@ -20,7 +32,5 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-
-
 }
 
