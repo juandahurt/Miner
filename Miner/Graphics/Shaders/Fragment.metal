@@ -10,8 +10,9 @@ using namespace metal;
 
 struct RasterizerData {
     float4 position [[position]];
+    float4 color;
 };
 
 float4 fragment fragmentShader(RasterizerData data [[stage_in]]) {
-    return float4(1, 0.2, 1, 1);
+    return data.color;
 }

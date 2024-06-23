@@ -12,9 +12,9 @@ class MNRRenderer: NSObject, MTKViewDelegate {
     let commandQueue: MTLCommandQueue
     
     let vertices: [Float] = [
-        0, 1, 0,
-        -1, -1, 0,
-        1, -1, 0
+        0, 1, 0, 1, 0, 0,
+        -1, -1, 0, 0, 1, 0,
+        1, -1, 0, 0, 0, 1
     ]
     let indices: [Int16] = [
         0, 1, 2
@@ -52,7 +52,11 @@ class MNRRenderer: NSObject, MTKViewDelegate {
         vertexDescriptor.attributes[0].offset = 0
         vertexDescriptor.attributes[0].bufferIndex = 0
         
-        vertexDescriptor.layouts[0].stride = MemoryLayout<SIMD3<Float>>.stride
+        vertexDescriptor.attributes[1].format = .float3
+        vertexDescriptor.attributes[1].offset = MemoryLayout<Float>.stride * 3
+        vertexDescriptor.attributes[1].bufferIndex = 0
+        
+        vertexDescriptor.layouts[0].stride = MemoryLayout<Float>.stride * 6
         
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.vertexFunction = vertexFunction
@@ -60,7 +64,9 @@ class MNRRenderer: NSObject, MTKViewDelegate {
         pipelineDescriptor.vertexDescriptor = vertexDescriptor
         pipelineDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
         
-        renderPipelineState = try? device.makeRenderPipelineState(descriptor: pipelineDescriptor)
+        renderPipelineState = try? device.makeRenderPipelineState(
+            descriptor: pipelineDescriptor
+        )
     }
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
