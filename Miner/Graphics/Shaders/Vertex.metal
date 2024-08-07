@@ -6,21 +6,23 @@
 //
 
 #include <metal_stdlib>
+#include "../Commons.h"
+
 using namespace metal;
 
 struct Vertex {
     float3 position [[attribute(0)]];
-    float3 color [[attribute(1)]];
+    float2 textureCoordinate [[attribute(1)]];
 };
 
 struct RasterizerData {
     float4 position [[position]];
-    float4 color;
+    float2 textureCoordiante;
 };
 
-RasterizerData vertex vertexShader(const Vertex inVertex [[stage_in]]) {
+RasterizerData vertex vertexShader(const Vertex inVertex [[stage_in]], constant Uniforms& uniforms [[ buffer(10) ]]) {
     return {
-        .position = float4(inVertex.position, 1),
-        .color = float4(inVertex.color, 1)
+        .position = uniforms.projectionMatrix * uniforms.viewMatrix * uniforms.modelMatrix * float4(inVertex.position, 1),
+        .textureCoordiante = inVertex.textureCoordinate
     };
 }

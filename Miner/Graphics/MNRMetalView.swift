@@ -11,15 +11,12 @@ class MNRMetalView: MTKView {
     private var renderer: MNRRenderer
     
     init(frame: CGRect) {
-        guard let device = MTLCreateSystemDefaultDevice() else {
-            MNRLogger.error(message: "GPU is not available")
-            fatalError()
-        }
-        self.renderer = MNRRenderer(device: device)
-        super.init(frame: frame, device: device)
+        self.renderer = MNRRenderer(device: MNRGraphics.device)
+        super.init(frame: frame, device: MNRGraphics.device)
         delegate = renderer
         
         clearColor = .init(red: 0.1, green: 0.1, blue: 0.5, alpha: 1)
+        depthStencilPixelFormat = .depth16Unorm
     }
     
     required init(coder: NSCoder) {
