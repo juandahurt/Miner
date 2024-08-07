@@ -10,9 +10,12 @@ using namespace metal;
 
 struct RasterizerData {
     float4 position [[position]];
-    float4 color;
+    float2 textureCoordiante;
 };
 
-float4 fragment fragmentShader(RasterizerData data [[stage_in]]) {
-    return data.color;
+float4 fragment fragmentShader(RasterizerData data [[stage_in]], 
+                               texture2d<float> colorTexture [[texture(0)]]) {
+    constexpr sampler textureSampler(mag_filter::nearest, min_filter::linear);
+    auto color = colorTexture.sample(textureSampler, data.textureCoordiante);
+    return color;
 }

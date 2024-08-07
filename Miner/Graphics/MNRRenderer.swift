@@ -8,37 +8,23 @@
 import MetalKit
 
 class MNRRenderer: NSObject, MTKViewDelegate {
-    let device: MTLDevice
     let commandQueue: MTLCommandQueue
-    
-    let vertices: [Float] = [
-        0, 1, 0, 1, 0, 0,
-        -1, -1, 0, 0, 1, 0,
-        1, -1, 0, 0, 0, 1
-    ]
-    let indices: [Int16] = [
-        0, 1, 2
-    ]
-    let vertexBuffer: MTLBuffer!
-    let indexBuffer: MTLBuffer!
     let renderPipelineState: MTLRenderPipelineState?
+    let voxel: MNRVoxel
+    
+    var depthStencilState: MTLDepthStencilState?
+    
+    var uniforms = Uniforms()
+    var value: Float = 0.0
+    
+    let texture: MTLTexture!
     
     init(device: MTLDevice) {
-        self.device = device
         guard let commandQueue = device.makeCommandQueue() else {
             MNRLogger.error(message: "command queue could not be created")
             fatalError()
         }
         self.commandQueue = commandQueue
-        
-        vertexBuffer = device.makeBuffer(
-            bytes: &vertices,
-            length: MemoryLayout<Float>.stride * vertices.count
-        )
-        indexBuffer = device.makeBuffer(
-            bytes: &indices,
-            length: MemoryLayout<Int16>.stride * indices.count
-        )
         
         guard let library = device.makeDefaultLibrary() else {
             MNRLogger.error(message: "metal files couldn't be found")
@@ -52,52 +38,72 @@ class MNRRenderer: NSObject, MTKViewDelegate {
         vertexDescriptor.attributes[0].offset = 0
         vertexDescriptor.attributes[0].bufferIndex = 0
         
-        vertexDescriptor.attributes[1].format = .float3
-        vertexDescriptor.attributes[1].offset = MemoryLayout<Float>.stride * 3
+        vertexDescriptor.attributes[1].format = .float2
+        vertexDescriptor.attributes[1].offset = MemoryLayout<SIMD3<Float>>.stride
         vertexDescriptor.attributes[1].bufferIndex = 0
         
-        vertexDescriptor.layouts[0].stride = MemoryLayout<Float>.stride * 6
+        vertexDescriptor.layouts[0].stride = MemoryLayout<MNRVertex>.stride
         
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.vertexFunction = vertexFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
         pipelineDescriptor.vertexDescriptor = vertexDescriptor
         pipelineDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+        pipelineDescriptor.depthAttachmentPixelFormat = .depth16Unorm
         
         renderPipelineState = try? device.makeRenderPipelineState(
             descriptor: pipelineDescriptor
         )
+        
+        voxel = .init(device: device)
+        
+        let textureLoader = MTKTextureLoader(device: device)
+        let url = Bundle.main.url(forResource: "textures", withExtension: "png")!
+        texture = try! textureLoader.newTexture(URL: url)
+        
+        let stencilDescriptor = MTLDepthStencilDescriptor()
+        stencilDescriptor.depthCompareFunction = .less
+        stencilDescriptor.isDepthWriteEnabled = true
+        depthStencilState = device.makeDepthStencilState(descriptor: stencilDescriptor)
     }
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         MNRLogger.debug(message: "view is being resized")
+        let projectionMatrix = float4x4(
+            projectionFov: Float(45).degreesToRadians,
+            near: 0.1,
+            far: 100,
+            aspect: Float(size.width) / Float(size.height)
+        )
+        uniforms.projectionMatrix = projectionMatrix
     }
     
     func draw(in view: MTKView) {
         guard 
             let drawable = view.currentDrawable,
             let renderDescriptor = view.currentRenderPassDescriptor,
-            let commandBuffer = commandQueue.makeCommandBuffer()
+            let commandBuffer = commandQueue.makeCommandBuffer(),
+            let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderDescriptor)
         else {
             return
         }
-        let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderDescriptor)
+        value += 0.01
         
-        encoder?.setRenderPipelineState(renderPipelineState!)
-        encoder?.setVertexBuffer(
-            vertexBuffer,
-            offset: 0,
-            index: 0
-        )
-        encoder?.drawIndexedPrimitives(
-            type: .triangle,
-            indexCount: indices.count,
-            indexType: .uint16,
-            indexBuffer: indexBuffer,
-            indexBufferOffset: 0
-        )
+        uniforms.viewMatrix = float4x4(translation: [0, 0, 5])
+//        uniforms.modelMatrix = .init(translation: [Float(sin(value)), 0, 0])
+        uniforms.modelMatrix = float4x4(rotation: [Float(sin(value)), Float(sin(value)), 0])
         
-        encoder?.endEncoding()
+        encoder.setDepthStencilState(depthStencilState)
+        encoder.setFragmentTexture(texture, index: 0)
+        encoder.setVertexBytes(
+            &uniforms,
+            length: MemoryLayout<Uniforms>.stride,
+            index: 10
+        )
+        encoder.setRenderPipelineState(renderPipelineState!)
+        voxel.draw(using: encoder)
+        
+        encoder.endEncoding()
         commandBuffer.present(drawable)
         commandBuffer.commit()
     }
