@@ -36,11 +36,6 @@ class MNRTextureManager {
             .init(type: .earth, face: .top): (0, 0)
         ]
     }
-    
-//    func getTexturePosition(ofType: MNRVoxelType, face: MNRVoxelFace) -> SIMD2<UInt> {
-//        let positions = texturePositions[TexturePositionId(type: type, face: face)]
-//        return [positions.0, positions.1]
-//    }
 }
 
 

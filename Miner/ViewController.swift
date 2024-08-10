@@ -14,7 +14,6 @@ class ViewController: NSViewController {
         
         MNRLogger.setup()
         
-        
         let metalView = MNRMetalView(frame: view.bounds)
         metalView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(metalView)
@@ -25,6 +24,8 @@ class ViewController: NSViewController {
             metalView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             metalView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
+        
+        MNRSceneManager.instance.setCurrentScene(MNRMainScene())
     }
 
     override var representedObject: Any? {

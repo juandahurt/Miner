@@ -7,10 +7,9 @@
 
 import MetalKit
 
-class MNRVoxel {
+class MNRVoxel: MNRNode {
     var type: MNRVoxelType = .earth
     
-    var position: SIMD3<Float> = .zero
     var vertexBuffer: MTLBuffer
     var indexBuffer: MTLBuffer
     
@@ -78,13 +77,8 @@ class MNRVoxel {
         21, 22, 23
     ]
     
-    private func loadTextureCoordinates() {
-//        for var vertex in vertices {
-//            vertex.
-//        }
-    }
-    
-    init(device: MTLDevice) {
+    override init() {
+        let device = MNRGraphics.device
         vertexBuffer = device.makeBuffer(
             bytes: &vertices,
             length: MemoryLayout<MNRVertex>.stride * vertices.count
@@ -95,7 +89,14 @@ class MNRVoxel {
         )!
     }
     
-    func draw(using encoder: MTLRenderCommandEncoder) {
+    override func draw(using encoder: MTLRenderCommandEncoder, uniforms: Uniforms) {
+        var uniforms = uniforms
+        uniforms.modelMatrix = .init(translation: position) * .init(rotation: rotation)
+        encoder.setVertexBytes(
+            &uniforms,
+            length: MemoryLayout<Uniforms>.stride,
+            index: 10
+        )
         encoder.setVertexBuffer(
             vertexBuffer,
             offset: 0,
