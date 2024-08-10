@@ -10,12 +10,10 @@ import MetalKit
 class MNRRenderer: NSObject, MTKViewDelegate {
     let commandQueue: MTLCommandQueue
     let renderPipelineState: MTLRenderPipelineState?
-    let voxel: MNRVoxel
     
     var depthStencilState: MTLDepthStencilState?
     
     var uniforms = Uniforms()
-    var value: Float = 0.0
     
     let texture: MTLTexture!
     
@@ -55,8 +53,6 @@ class MNRRenderer: NSObject, MTKViewDelegate {
             descriptor: pipelineDescriptor
         )
         
-        voxel = .init(device: device)
-        
         let textureLoader = MTKTextureLoader(device: device)
         let url = Bundle.main.url(forResource: "textures", withExtension: "png")!
         texture = try! textureLoader.newTexture(URL: url)
@@ -87,21 +83,16 @@ class MNRRenderer: NSObject, MTKViewDelegate {
         else {
             return
         }
-        value += 0.01
         
-        uniforms.viewMatrix = float4x4(translation: [0, 0, 5])
-//        uniforms.modelMatrix = .init(translation: [Float(sin(value)), 0, 0])
-        uniforms.modelMatrix = float4x4(rotation: [Float(sin(value)), Float(sin(value)), 0])
+        uniforms.viewMatrix = float4x4(translation: [0, 0, 8])
         
         encoder.setDepthStencilState(depthStencilState)
         encoder.setFragmentTexture(texture, index: 0)
-        encoder.setVertexBytes(
-            &uniforms,
-            length: MemoryLayout<Uniforms>.stride,
-            index: 10
-        )
         encoder.setRenderPipelineState(renderPipelineState!)
-        voxel.draw(using: encoder)
+        
+        let currentScene = MNRSceneManager.instance.currentScene
+        currentScene?.update()
+        currentScene?.draw(using: encoder, uniforms: uniforms)
         
         encoder.endEncoding()
         commandBuffer.present(drawable)

@@ -13,6 +13,8 @@
 		2F205F772C178B4D008C3B7B /* MNRRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F205F762C178B4D008C3B7B /* MNRRenderer.swift */; };
 		2F2FA5152C433415007DE801 /* MNRGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2FA5142C433415007DE801 /* MNRGraphics.swift */; };
 		2F588C642C28980800821D06 /* MNRVoxel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F588C632C28980800821D06 /* MNRVoxel.swift */; };
+		2F5B78AC2C66C4FF00C45B5A /* MNRNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5B78AB2C66C4FF00C45B5A /* MNRNode.swift */; };
+		2F5B78B02C66CA3F00C45B5A /* MNRMainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5B78AF2C66CA3F00C45B5A /* MNRMainScene.swift */; };
 		2F6C83E92C1E57B6002E4D3A /* Vertex.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C83E82C1E57B6002E4D3A /* Vertex.metal */; };
 		2F6C83EB2C1E57FC002E4D3A /* Fragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2F6C83EA2C1E57FC002E4D3A /* Fragment.metal */; };
 		2F7E80BE2C2F6B0E00763D2B /* BridgingHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E80BD2C2F6B0E00763D2B /* BridgingHeader.m */; };
@@ -21,6 +23,7 @@
 		2FBA17EB2C07F5150090439C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBA17EA2C07F5150090439C /* ViewController.swift */; };
 		2FBA17ED2C07F5160090439C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FBA17EC2C07F5160090439C /* Assets.xcassets */; };
 		2FBA17F02C07F5160090439C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FBA17EE2C07F5160090439C /* Main.storyboard */; };
+		2FC76DD12C66641E0088034F /* MNRScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC76DD02C66641E0088034F /* MNRScene.swift */; };
 		2FDD3E9D2C3B6CAF00E058E0 /* MNRTextureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD3E9C2C3B6CAF00E058E0 /* MNRTextureManager.swift */; };
 		2FEDCBB32C372CCD004EC6CC /* textures.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FEDCBB22C372CCD004EC6CC /* textures.png */; };
 /* End PBXBuildFile section */
@@ -31,6 +34,8 @@
 		2F205F762C178B4D008C3B7B /* MNRRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRRenderer.swift; sourceTree = "<group>"; };
 		2F2FA5142C433415007DE801 /* MNRGraphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRGraphics.swift; sourceTree = "<group>"; };
 		2F588C632C28980800821D06 /* MNRVoxel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRVoxel.swift; sourceTree = "<group>"; };
+		2F5B78AB2C66C4FF00C45B5A /* MNRNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRNode.swift; sourceTree = "<group>"; };
+		2F5B78AF2C66CA3F00C45B5A /* MNRMainScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRMainScene.swift; sourceTree = "<group>"; };
 		2F6C83E82C1E57B6002E4D3A /* Vertex.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Vertex.metal; sourceTree = "<group>"; };
 		2F6C83EA2C1E57FC002E4D3A /* Fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fragment.metal; sourceTree = "<group>"; };
 		2F7E80BB2C2F68DB00763D2B /* Commons.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Commons.h; sourceTree = "<group>"; };
@@ -42,6 +47,7 @@
 		2FBA17EC2C07F5160090439C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FBA17EF2C07F5160090439C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2FBA17F12C07F5160090439C /* Miner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Miner.entitlements; sourceTree = "<group>"; };
+		2FC76DD02C66641E0088034F /* MNRScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRScene.swift; sourceTree = "<group>"; };
 		2FDD3E9C2C3B6CAF00E058E0 /* MNRTextureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRTextureManager.swift; sourceTree = "<group>"; };
 		2FEDCBB22C372CCD004EC6CC /* textures.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textures.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +64,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F2033662C65ACDB00C4DC33 /* Voxel */ = {
+			isa = PBXGroup;
+			children = (
+				2F588C632C28980800821D06 /* MNRVoxel.swift */,
+			);
+			path = Voxel;
+			sourceTree = "<group>";
+		};
 		2F205F6B2C1782C3008C3B7B /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -92,9 +106,20 @@
 		2F588C622C2897FA00821D06 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				2F588C632C28980800821D06 /* MNRVoxel.swift */,
+				2F5B78AA2C66C4F400C45B5A /* Graph */,
+				2F2033662C65ACDB00C4DC33 /* Voxel */,
+				2F5B78AF2C66CA3F00C45B5A /* MNRMainScene.swift */,
 			);
 			path = Game;
+			sourceTree = "<group>";
+		};
+		2F5B78AA2C66C4F400C45B5A /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				2F5B78AB2C66C4FF00C45B5A /* MNRNode.swift */,
+				2FC76DD02C66641E0088034F /* MNRScene.swift */,
+			);
+			path = Graph;
 			sourceTree = "<group>";
 		};
 		2F6C83E52C1E579D002E4D3A /* Shaders */ = {
@@ -233,7 +258,10 @@
 				2F6C83E92C1E57B6002E4D3A /* Vertex.metal in Sources */,
 				2F7E80C12C2F89E100763D2B /* MNRMath.swift in Sources */,
 				2F588C642C28980800821D06 /* MNRVoxel.swift in Sources */,
+				2F5B78AC2C66C4FF00C45B5A /* MNRNode.swift in Sources */,
 				2F205F6F2C17833E008C3B7B /* MNRLogger.swift in Sources */,
+				2F5B78B02C66CA3F00C45B5A /* MNRMainScene.swift in Sources */,
+				2FC76DD12C66641E0088034F /* MNRScene.swift in Sources */,
 				2F6C83EB2C1E57FC002E4D3A /* Fragment.metal in Sources */,
 				2FBA17E92C07F5150090439C /* AppDelegate.swift in Sources */,
 			);
