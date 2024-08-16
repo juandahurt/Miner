@@ -17,14 +17,14 @@ class MNRMainScene: MNRScene {
             voxels.append(voxel)
         }
         
-        voxels[0].position = [5, 0, 0]
-        voxels[1].position = [0, -3, 0]
-        voxels[2].position = [-1, 0, 4]
+        voxels[0].getComponent(TransformComponent.self).position = [5, 0, 0]
+        voxels[1].getComponent(TransformComponent.self).position = [0, -3, 0]
+        voxels[2].getComponent(TransformComponent.self).position = [-1, 0, 4]
     }
     
     override func update() {
         value += 0.1
-        voxels[0].rotation.x = sin(Float(value))
-        voxels[3].rotation = [0, sin(Float(value)), sin(Float(value))]
+        voxels[0].getComponent(TransformComponent.self).rotation.x = sin(Float(value))
+//        voxels[3].rotation = [0, sin(Float(value)), sin(Float(value))]
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F06BA852C67FA32001CDA4C /* MNRNode+getComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F06BA842C67FA32001CDA4C /* MNRNode+getComponent.swift */; };
+		2F06BA872C67FA42001CDA4C /* MNRComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F06BA862C67FA42001CDA4C /* MNRComponent.swift */; };
 		2F205F6F2C17833E008C3B7B /* MNRLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F205F6E2C17833E008C3B7B /* MNRLogger.swift */; };
 		2F205F722C178392008C3B7B /* Pepe in Frameworks */ = {isa = PBXBuildFile; productRef = 2F205F712C178392008C3B7B /* Pepe */; };
 		2F205F752C178956008C3B7B /* MNRMetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F205F742C178956008C3B7B /* MNRMetalView.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F06BA842C67FA32001CDA4C /* MNRNode+getComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MNRNode+getComponent.swift"; sourceTree = "<group>"; };
+		2F06BA862C67FA42001CDA4C /* MNRComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRComponent.swift; sourceTree = "<group>"; };
 		2F205F6E2C17833E008C3B7B /* MNRLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRLogger.swift; sourceTree = "<group>"; };
 		2F205F742C178956008C3B7B /* MNRMetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRMetalView.swift; sourceTree = "<group>"; };
 		2F205F762C178B4D008C3B7B /* MNRRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNRRenderer.swift; sourceTree = "<group>"; };
@@ -64,6 +68,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F06BA822C67FA23001CDA4C /* ECS */ = {
+			isa = PBXGroup;
+			children = (
+				2F06BA842C67FA32001CDA4C /* MNRNode+getComponent.swift */,
+				2F06BA862C67FA42001CDA4C /* MNRComponent.swift */,
+			);
+			path = ECS;
+			sourceTree = "<group>";
+		};
 		2F2033662C65ACDB00C4DC33 /* Voxel */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +119,7 @@
 		2F588C622C2897FA00821D06 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				2F06BA822C67FA23001CDA4C /* ECS */,
 				2F5B78AA2C66C4F400C45B5A /* Graph */,
 				2F2033662C65ACDB00C4DC33 /* Voxel */,
 				2F5B78AF2C66CA3F00C45B5A /* MNRMainScene.swift */,
@@ -251,11 +265,13 @@
 			files = (
 				2F205F752C178956008C3B7B /* MNRMetalView.swift in Sources */,
 				2F205F772C178B4D008C3B7B /* MNRRenderer.swift in Sources */,
+				2F06BA872C67FA42001CDA4C /* MNRComponent.swift in Sources */,
 				2F2FA5152C433415007DE801 /* MNRGraphics.swift in Sources */,
 				2F7E80BE2C2F6B0E00763D2B /* BridgingHeader.m in Sources */,
 				2FDD3E9D2C3B6CAF00E058E0 /* MNRTextureManager.swift in Sources */,
 				2FBA17EB2C07F5150090439C /* ViewController.swift in Sources */,
 				2F6C83E92C1E57B6002E4D3A /* Vertex.metal in Sources */,
+				2F06BA852C67FA32001CDA4C /* MNRNode+getComponent.swift in Sources */,
 				2F7E80C12C2F89E100763D2B /* MNRMath.swift in Sources */,
 				2F588C642C28980800821D06 /* MNRVoxel.swift in Sources */,
 				2F5B78AC2C66C4FF00C45B5A /* MNRNode.swift in Sources */,
