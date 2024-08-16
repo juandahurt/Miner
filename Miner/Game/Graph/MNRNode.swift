@@ -9,8 +9,9 @@ import MetalKit
 
 class MNRNode {
     var children: [MNRNode] = []
-    var position = float3.zero
-    var rotation = float3.zero
+    var components: [MNRComponent] = [
+        TransformComponent()
+    ]
     
     func draw(using encoder: MTLRenderCommandEncoder, uniforms: Uniforms) {
         for node in children {

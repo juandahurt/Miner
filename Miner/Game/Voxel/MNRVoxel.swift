@@ -91,7 +91,8 @@ class MNRVoxel: MNRNode {
     
     override func draw(using encoder: MTLRenderCommandEncoder, uniforms: Uniforms) {
         var uniforms = uniforms
-        uniforms.modelMatrix = .init(translation: position) * .init(rotation: rotation)
+        let transformComponent = getComponent(TransformComponent.self)
+        uniforms.modelMatrix = .init(translation: transformComponent.position) * .init(rotation: transformComponent.rotation)
         encoder.setVertexBytes(
             &uniforms,
             length: MemoryLayout<Uniforms>.stride,
