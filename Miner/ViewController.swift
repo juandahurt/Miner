@@ -27,11 +27,5 @@ class ViewController: NSViewController {
         
         MNRSceneManager.instance.setCurrentScene(MNRMainScene())
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
 }
 

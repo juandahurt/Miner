@@ -25,6 +25,5 @@ class MNRMainScene: MNRScene {
     override func update() {
         value += 0.1
         voxels[0].getComponent(TransformComponent.self).rotation.x = sin(Float(value))
-//        voxels[3].rotation = [0, sin(Float(value)), sin(Float(value))]
     }
 }
