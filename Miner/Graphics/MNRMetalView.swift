@@ -51,6 +51,10 @@ extension MNRMetalView {
     }
     
     override func keyDown(with event: NSEvent) {
-        debugPrint(event)
+        MNRInput.pressedKey(event)
+    }
+    
+    override func keyUp(with event: NSEvent) {
+        MNRInput.releasedKey(event)
     }
 }

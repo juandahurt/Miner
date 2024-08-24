@@ -7,8 +7,10 @@
 
 import Foundation
 
-struct MNRKey {
-    private init() {}
-    
-    static let w = 1
+/// Represents a keyboard key
+/// 
+/// Apple uses 16-bit unsigned int to identify them.
+enum MNRKey: UInt16 {
+    case w = 13
+    // TODO: add more keys
 }
