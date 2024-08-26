@@ -72,6 +72,8 @@ class MNRRenderer: NSObject, MTKViewDelegate {
             aspect: Float(size.width) / Float(size.height)
         )
         uniforms.projectionMatrix = projectionMatrix
+        
+        MNRWindow.updateSize(size)
     }
     
     func draw(in view: MTKView) {
