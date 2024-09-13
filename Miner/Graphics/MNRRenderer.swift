@@ -17,6 +17,8 @@ class MNRRenderer: NSObject, MTKViewDelegate {
     
     let texture: MTLTexture!
     
+    var cameraPos = float3([0, 0, -3])
+    
     init(device: MTLDevice) {
         guard let commandQueue = device.makeCommandQueue() else {
             MNRLogger.error(message: "command queue could not be created")
@@ -86,7 +88,26 @@ class MNRRenderer: NSObject, MTKViewDelegate {
             return
         }
         
-        uniforms.viewMatrix = float4x4(translation: [0, 0, 8])
+        
+        let cameraFront = float3([0, 0, 1])
+        let cameraUp = float3([0, 1, 0])
+        let viewMatrix = float4x4(eye: cameraPos, center: cameraPos + cameraFront, up: cameraUp)
+        let cameraSpeed: Float = 0.5
+        
+        if MNRInput.isKeyDown(.w) {
+            cameraPos += cameraFront * cameraSpeed
+        }
+        if MNRInput.isKeyDown(.s) {
+            cameraPos -= cameraFront * cameraSpeed
+        }
+        if MNRInput.isKeyDown(.a) {
+            cameraPos += normalize(cross(cameraFront, cameraUp)) * cameraSpeed
+        }
+        if MNRInput.isKeyDown(.d) {
+            cameraPos -= normalize(cross(cameraFront, cameraUp)) * cameraSpeed
+        }
+        
+        uniforms.viewMatrix = viewMatrix
         
         encoder.setDepthStencilState(depthStencilState)
         encoder.setFragmentTexture(texture, index: 0)

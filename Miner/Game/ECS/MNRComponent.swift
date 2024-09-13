@@ -13,3 +13,7 @@ class TransformComponent: MNRComponent {
     var position: float3 = .zero
     var rotation: float3 = .zero
 }
+
+class CameraComponent: MNRComponent {
+    
+}
