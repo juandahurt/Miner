@@ -18,6 +18,8 @@ class MNRRenderer: NSObject, MTKViewDelegate {
     let texture: MTLTexture!
     
     var cameraPos = float3([0, 0, -3])
+    var deltaTime: Double = 0
+    var lasTime: Double = 0
     
     init(device: MTLDevice) {
         guard let commandQueue = device.makeCommandQueue() else {
@@ -87,12 +89,14 @@ class MNRRenderer: NSObject, MTKViewDelegate {
         else {
             return
         }
-        
+        let currentTime = Date().timeIntervalSince1970
+        deltaTime = currentTime - lasTime
+        lasTime = currentTime
         
         let cameraFront = float3([0, 0, 1])
         let cameraUp = float3([0, 1, 0])
         let viewMatrix = float4x4(eye: cameraPos, center: cameraPos + cameraFront, up: cameraUp)
-        let cameraSpeed: Float = 0.5
+        let cameraSpeed: Float = 0.1
         
         if MNRInput.isKeyDown(.w) {
             cameraPos += cameraFront * cameraSpeed
@@ -113,8 +117,9 @@ class MNRRenderer: NSObject, MTKViewDelegate {
         encoder.setFragmentTexture(texture, index: 0)
         encoder.setRenderPipelineState(renderPipelineState!)
         
+        // update and draw scene
         let currentScene = MNRSceneManager.instance.currentScene
-        currentScene?.update()
+        currentScene?.update(deltaTime: Float(deltaTime))
         currentScene?.draw(using: encoder, uniforms: uniforms)
         
         encoder.endEncoding()

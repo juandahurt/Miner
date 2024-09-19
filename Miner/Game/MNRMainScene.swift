@@ -7,31 +7,23 @@
 
 class MNRMainScene: MNRScene {
     var voxels: [MNRVoxel] = []
-    let numOfVoxels = 4
-    var value = 0.0
+    let numOfVoxels = 20
+    let numRows = 20
+    let numCols = 20
     var mousePosition: CGPoint = .zero
     
     override func setup() {
-        for _ in 0..<numOfVoxels {
-            let voxel = MNRVoxel()
-            addNode(node: voxel)
-            voxels.append(voxel)
+        for row in 0..<numRows {
+            for col in 0..<numCols {
+                let voxel = MNRVoxel()
+                addNode(node: voxel)
+                voxels.append(voxel)
+                voxel.getComponent(TransformComponent.self).position = [Float(col), -2, Float(row)]
+            }
         }
-        
-        voxels[0].getComponent(TransformComponent.self).position = [5, 0, 0]
-        voxels[1].getComponent(TransformComponent.self).position = [0, -3, 0]
-        voxels[2].getComponent(TransformComponent.self).position = [-1, 0, 4]
     }
     
-    override func update() {
-        if mousePosition != MNRInput.mousePosition {
-            mousePosition = MNRInput.mousePosition
-        }
-        if MNRInput.isKeyDown(.w) {
-            print(mousePosition)
-            print("w is being pressed")
-        }
-        value += 0.1
-        voxels[0].getComponent(TransformComponent.self).rotation.x = sin(Float(value))
+    override func update(deltaTime: Float) {
+        
     }
 }

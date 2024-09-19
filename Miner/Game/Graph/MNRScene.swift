@@ -18,7 +18,7 @@ class MNRScene: MNRNode {
     }
     
     func setup() {}
-    func update() {}
+    func update(deltaTime: Float) {}
 }
 
 
