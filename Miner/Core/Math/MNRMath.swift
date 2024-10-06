@@ -23,6 +23,15 @@ extension Float {
     }
 }
 
+extension CGFloat {
+    var radianToDegrees: CGFloat {
+        (self / .pi) * 180
+    }
+    var degreesToRadians: CGFloat {
+        (self / 180) * .pi
+    }
+}
+
 // MARK: - float4
 extension float4x4 {
     // MARK: - Translate

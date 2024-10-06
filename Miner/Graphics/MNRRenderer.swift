@@ -93,25 +93,7 @@ class MNRRenderer: NSObject, MTKViewDelegate {
         deltaTime = currentTime - lasTime
         lasTime = currentTime
         
-        let cameraFront = float3([0, 0, 1])
-        let cameraUp = float3([0, 1, 0])
-        let viewMatrix = float4x4(eye: cameraPos, center: cameraPos + cameraFront, up: cameraUp)
-        let cameraSpeed: Float = 0.1
-        
-        if MNRInput.isKeyDown(.w) {
-            cameraPos += cameraFront * cameraSpeed
-        }
-        if MNRInput.isKeyDown(.s) {
-            cameraPos -= cameraFront * cameraSpeed
-        }
-        if MNRInput.isKeyDown(.a) {
-            cameraPos += normalize(cross(cameraFront, cameraUp)) * cameraSpeed
-        }
-        if MNRInput.isKeyDown(.d) {
-            cameraPos -= normalize(cross(cameraFront, cameraUp)) * cameraSpeed
-        }
-        
-        uniforms.viewMatrix = viewMatrix
+        uniforms.viewMatrix = MNRSceneManager.instance.currentScene!.currentCamera.matrix
         
         encoder.setDepthStencilState(depthStencilState)
         encoder.setFragmentTexture(texture, index: 0)
