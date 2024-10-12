@@ -8,6 +8,8 @@
 import Foundation
 
 class MNRScene: MNRNode {
+    var currentCamera = MNRCamera()
+    
     override init() {
         super.init()
         setup()
@@ -18,7 +20,7 @@ class MNRScene: MNRNode {
     }
     
     func setup() {}
-    func update() {}
+    func update(deltaTime: Float) {}
 }
 
 

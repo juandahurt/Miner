@@ -17,6 +17,10 @@ class MNRRenderer: NSObject, MTKViewDelegate {
     
     let texture: MTLTexture!
     
+    var cameraPos = float3([0, 0, -3])
+    var deltaTime: Double = 0
+    var lasTime: Double = 0
+    
     init(device: MTLDevice) {
         guard let commandQueue = device.makeCommandQueue() else {
             MNRLogger.error(message: "command queue could not be created")
@@ -85,15 +89,19 @@ class MNRRenderer: NSObject, MTKViewDelegate {
         else {
             return
         }
+        let currentTime = Date().timeIntervalSince1970
+        deltaTime = currentTime - lasTime
+        lasTime = currentTime
         
-        uniforms.viewMatrix = float4x4(translation: [0, 0, 8])
+        uniforms.viewMatrix = MNRSceneManager.instance.currentScene!.currentCamera.matrix
         
         encoder.setDepthStencilState(depthStencilState)
         encoder.setFragmentTexture(texture, index: 0)
         encoder.setRenderPipelineState(renderPipelineState!)
         
+        // update and draw scene
         let currentScene = MNRSceneManager.instance.currentScene
-        currentScene?.update()
+        currentScene?.update(deltaTime: Float(deltaTime))
         currentScene?.draw(using: encoder, uniforms: uniforms)
         
         encoder.endEncoding()

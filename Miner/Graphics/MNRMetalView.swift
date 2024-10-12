@@ -21,7 +21,7 @@ class MNRMetalView: MTKView {
         super.init(frame: frame, device: MNRGraphics.device)
         delegate = renderer
         
-        clearColor = .init(red: 0.1, green: 0.1, blue: 0.5, alpha: 1)
+        clearColor = .init(red: 0.83, green: 0.87, blue: 0.98, alpha: 1)
         depthStencilPixelFormat = .depth16Unorm
     }
     
